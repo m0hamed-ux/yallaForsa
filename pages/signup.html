@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp-Formulaire</title>
+    <link rel="stylesheet" href="../src/css/signup.css">
+    <link rel="stylesheet" href="../src/bootstraap/bootstrap.min.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <h1>Set Your Informations </h1>
+        <form action="">
+            <h3>Offer Service For Moroccans</h3>
+            <input type="text" name="" id="cin" placeholder="Cin " class="form-control"><br>
+            <input type="text" name="" id="f-name" placeholder="First Name " class="form-control"><br>
+            <input type="text" name="" id="last-name" placeholder=" Last Name" class="form-control"><br>
+            <input type="email" name="" id="email" placeholder="Email" class="form-control"><br>
+            <input type="password" name="" id="pass" placeholder="Password" class="form-control"><br>
+            <div class="input-group mb-3">
+                <span class="input-group-text">+212</span>
+                <input type="number" class="form-control" id="phone" placeholder="Phone Number">
+            </div>
+            <label for="" style="text-align: center;"><b>Your Birthday</b></label>     
+            <input type="date" name="" id="date" class="form-control" placeholder="Bith" > <br>
+            <textarea name="" id="descrption" cols="112" rows="10" placeholder="Description"></textarea>
+            <br><strong>Type Of Your Service</strong><br>
+            <br><select name="" id="s" class="form-control mb-3">
+                <option value="Sectriter">Sectriter</option>
+                <option value="Audience">Audience</option>
+            </select>
+            <div class="input-group mb-3">
+                <input type="number" class="form-control" id="price" placeholder="Price">
+                <span class="input-group-text">MAD</span>
+            </div>
+            <input type="button" value="Sumbit" id="btnSumbit-Local" class="btn btn-primary w-100">
+        </form>
+        <form action="">
+            <h3>Offer Service For Foreigns</h3>            
+            <input type="text" name="" id="f-name-foreign" placeholder="First Name" class="form-control"><br>
+            <input type="text" name="" id="l-name-foreign" placeholder=" Last Name" class="form-control"><br>
+            <input type="email" name="" id="email-foreign" placeholder="Email" class="form-control"><br>
+            <input type="password" name="" id="pass-foreign" placeholder="Password" class="form-control"><br>
+            <input type="button" value="Login" id="btnSumbit-Foreign" class="btn btn-primary w-100">
+        </form>
+    </main>
+    <footer></footer>   
+    <script>
+        document.getElementById("btnSumbit-Local").addEventListener("click", () => {
+            const cin = document.getElementById("cin").value;
+            const fname = document.getElementById("f-name").value;
+            const lname = document.getElementById("last-name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const birthday = document.getElementById("date").value;
+            const description = document.getElementById("descrption").value;
+            const service = document.getElementById("s").value;
+            const price = document.getElementById("price").value;
+        
+            const person = {
+                cin, fname, lname, email, phone, birthday, description, service, price
+            };
+            let data = JSON.parse(localStorage.getItem("services")) || [];
+            data.push(person);
+            localStorage.setItem("services", JSON.stringify(data));    
+            cin.value=""
+            fname.value=""
+            email.value=""
+            phone.value=""
+            birthday.value=""
+            description.value=""
+            price.value=""
+            
+        })
+        </script>
+</body>
+</html>
