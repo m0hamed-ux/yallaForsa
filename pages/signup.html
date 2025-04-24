@@ -9,7 +9,7 @@
 </head>
 <body>
     <header></header>
-    <main>
+    <!-- <main>
         <h1>Set Your Informations </h1>
         <form action="">
             <h3>Offer Service For Moroccans</h3>
@@ -44,35 +44,116 @@
             <input type="password" name="" id="pass-foreign" placeholder="Password" class="form-control"><br>
             <input type="button" value="Login" id="btnSumbit-Foreign" class="btn btn-primary w-100">
         </form>
+    </main> -->
+    <main>
+        <h1 class="text-center">Set Your Informations</h1>
+        <div class="d-flex justify-content-center gap-2 mb-4">
+            <button type="button" class="btn btn-outline-primary" onclick="showForm('moroccan')">Moroccan</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="showForm('foreign')">Foreign</button>
+        </div>
+        <div id="form-moroccan">
+            <form>
+                <h3>Offer Service For Moroccans</h3>
+                <input type="text" id="cin" placeholder="Cin " class="form-control mb-2">
+                <input type="text" id="f-name" placeholder="First Name " class="form-control mb-2">
+                <input type="text" id="last-name" placeholder=" Last Name" class="form-control mb-2">
+                <input type="email" id="email" placeholder="Email" class="form-control mb-2">
+                <input type="password" id="pass" placeholder="Password" class="form-control mb-2">
+                <div class="input-group mb-2">
+                    <span class="input-group-text">+212</span>
+                    <input type="number" class="form-control" id="phone" placeholder="Phone Number">
+                </div>
+                <label><b>Your Birthday</b></label>
+                <input type="date" id="date" class="form-control mb-2">
+                <textarea id="descrption" rows="4" placeholder="Description" class="form-control mb-2"></textarea>
+                <select id="s" class="form-control mb-2">
+                    <option value="Sectriter">Sectriter</option>
+                    <option value="Audience">Audience</option>
+                    <option value="" disabled selected>Select your role</option>
+                    <option value="media">Media Support</option>
+                    <option value="transport">Transport Assistance</option>
+                    <option value="guest">Guest Services</option>
+                    <option value="security">Security Helper</option>
+                    <option value="stadium">Stadium Operations</option>
+                    <option value="accreditation">Accreditation Team</option>
+                    <option value="fan-zone">Fan Zone Assistant</option>
+                    <option value="logistics">Logistics & Supply</option>
+                    <option value="hospitality">Hospitality Assistant</option>
+                    <option value="interpreter">Language Interpreter</option>
+                </select>
+                <div class="input-group mb-3">
+                    <input type="number" id="price" class="form-control" placeholder="Price">
+                    <span class="input-group-text">MAD</span>
+                </div>
+                <button type="button" id="btnSumbit-Local" class="btn btn-primary w-100">SignUp</button>
+            </form>
+        </div>
+        <div id="form-foreign" style="display: none;">
+            <form>
+                <h3>Offer Service For Foreigns</h3>
+                <input type="text" id="f-name-foreign" placeholder="First Name" class="form-control mb-2">
+                <input type="text" id="l-name-foreign" placeholder="Last Name" class="form-control mb-2">
+                <input type="email" id="email-foreign" placeholder="Email" class="form-control mb-2">
+                <input type="password" id="pass-foreign" placeholder="Password" class="form-control mb-2">
+                <button type="button" id="btnSumbit-Foreign" class="btn btn-primary w-100">SignUp</button>
+            </form>
+        </div>
     </main>
     <footer></footer>   
     <script>
-        document.getElementById("btnSumbit-Local").addEventListener("click", () => {
-            const cin = document.getElementById("cin").value;
-            const fname = document.getElementById("f-name").value;
-            const lname = document.getElementById("last-name").value;
-            const email = document.getElementById("email").value;
-            const phone = document.getElementById("phone").value;
-            const birthday = document.getElementById("date").value;
-            const description = document.getElementById("descrption").value;
-            const service = document.getElementById("s").value;
-            const price = document.getElementById("price").value;
         
-            const person = {
-                cin, fname, lname, email, phone, birthday, description, service, price
-            };
-            let data = JSON.parse(localStorage.getItem("services")) || [];
-            data.push(person);
-            localStorage.setItem("services", JSON.stringify(data));    
-            cin.value=""
-            fname.value=""
-            email.value=""
-            phone.value=""
-            birthday.value=""
-            description.value=""
-            price.value=""
-            
+        document.getElementById("btnSumbit-Local").addEventListener("click", () => {
+           // أولاً خزن العناصر بوحدهم (DOM elements)
+const cinInput = document.getElementById("cin");
+const fnameInput = document.getElementById("f-name");
+const lnameInput = document.getElementById("last-name");
+const emailInput = document.getElementById("email");
+const phoneInput = document.getElementById("phone");
+const birthdayInput = document.getElementById("date");
+const descriptionInput = document.getElementById("descrption");
+const serviceInput = document.getElementById("s");
+const priceInput = document.getElementById("price");
+
+// خزن القيم
+const person = {
+  cin: cinInput.value,
+  fname: fnameInput.value,
+  lname: lnameInput.value,
+  email: emailInput.value,
+  phone: phoneInput.value,
+  birthday: birthdayInput.value,
+  description: descriptionInput.value,
+  service: serviceInput.value,
+  price: priceInput.value
+};
+
+// التخزين
+let data = JSON.parse(localStorage.getItem("services")) || [];
+data.push(person);
+localStorage.setItem("services", JSON.stringify(data));
+
+// تفريغ الحقول
+cinInput.value = "";
+fnameInput.value = "";
+lnameInput.value = "";
+emailInput.value = "";
+phoneInput.value = "";
+birthdayInput.value = "";
+descriptionInput.value = "";
+serviceInput.value = "";
+priceInput.value = "";
+
         })
+        // ADD Switch sign Foreign
+        function showForm(type) {
+            if (type === 'moroccan') {
+                document.getElementById('form-moroccan').style.display = 'block'
+                document.getElementById('form-foreign').style.display = 'none'
+            } else {
+                document.getElementById('form-moroccan').style.display = 'none'
+                document.getElementById('form-foreign').style.display = 'block'
+            }
+        } 
         </script>
 </body>
 </html>

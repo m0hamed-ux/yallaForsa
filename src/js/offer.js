@@ -13,14 +13,10 @@ document.getElementById("btnSearch").addEventListener("click", () => {
 
     displayResults(results);
   });
-
-  // عرض جميع البيانات
   function displayAllServices() {
     let data = JSON.parse(localStorage.getItem("services")) || [];
     displayResults(data);
   }
-
-  // عرض النتائج داخل container
   function displayResults(list) {
     const container = document.getElementById("container");
     container.innerHTML = "";
@@ -29,18 +25,19 @@ document.getElementById("btnSearch").addEventListener("click", () => {
       container.innerHTML = "<p>No results found.</p>";
       return;
     }
+    let person=1
 
     list.forEach(p => {
       container.innerHTML += `
         <div class="card p-3 mb-2">
-          <h5> <strong>Full Name:</strong>${p.fname} ${p.lname}</h5>
+            <h3 style="text-align:center";>Person${list.indexOf(p)+1}</h3>
+            <h5> <strong>Full Name:</strong>${p.fname} ${p.lname}</h5>
           <p><strong>Email:</strong> ${p.email}</p>
-          <p><strong>Number:</strong> ${p.phone}</p>
+          <p><strong>Number:</strong> +212${p.phone}</p>
           <p><strong>Service:</strong> ${p.service}</p>
           <p><strong>Price:</strong> ${p.price} MAD</p>
         </div>
       `;
     });
   }
-
   window.addEventListener("load", displayAllServices);
